@@ -38,48 +38,15 @@ public class UserResources {
         return userRepository.save(user);
     }
 
-    /*
-    @ApiOperation(value="Return List os problems")
-    @GetMapping(produces = "application/json")
-    public @ResponseBody
-    Iterable<User> listProblems() {
-        Iterable<User> problems = problemRepository.findAll();
-        return problems;
-    }
-
-    @GetMapping(path = "/{problemId}")
-    public ResponseEntity<?> getProblem(@PathVariable(value = "problemId") long problemId) {
-        Optional<User> problem = problemRepository.findById(problemId);
-        if (problem.isPresent())
-            return new ResponseEntity<>(problem.get(), HttpStatus.OK);
-
-        return new ResponseEntity<>(new ApiError(404, "Problem not found", new Date()), HttpStatus.NOT_FOUND);
-    }
-
-    @PostMapping()
-    public User addProblem(@RequestBody @Valid User user) {
-        return problemRepository.save(user);
-    }
-
-    @DeleteMapping()
-    public User delProblem(@RequestBody User user) {
-        problemRepository.delete(user);
+    @DeleteMapping("/user")
+    public User delUser(@RequestBody User user){
+        userRepository.delete(user);
         return user;
     }
 
-    @PutMapping(path = "/{problemId}", produces = "application/json")
-    public ResponseEntity<?> updateTask(@PathVariable("problemId") long problemId, @Valid @RequestBody User newUser) {
-        Optional<User> oldPessoa = problemRepository.findById(problemId);
-        if (oldPessoa.isPresent()) {
-            User pb = oldPessoa.get();
-            pb.setName(newUser.getName());
-            pb.setOrigin(newUser.getOrigin());
-            pb.setDate(newUser.getDate());
-            pb.setHour(newUser.getHour());
-            return new ResponseEntity<>(problemRepository.save(pb), HttpStatus.OK);
-        }
+    @PutMapping("/user")
+    public User updateUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
 
-        return new ResponseEntity<>(new ApiError(404, "Problem not found", new Date()), HttpStatus.NOT_FOUND);
-
-    }*/
 }
